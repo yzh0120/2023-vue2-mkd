@@ -1,0 +1,41 @@
+{
+  "name": "2023-vue2-admin",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "vue-cli-service serve",
+    "build:test": "vue-cli-service build --mode test",
+    "build:uat": "vue-cli-service build --mode uat",
+    "build": "vue-cli-service build --mode build"
+  },
+  "dependencies": {
+    "@riophae/vue-treeselect": "^0.4.0",
+    "axios": "^1.4.0",
+    "core-js": "^3.8.3",
+    "dayjs": "^1.10.6",
+    "element-resize-detector": "^1.2.4",
+    "element-ui": "^2.15.5",
+    "js-cookie": "^3.0.0",
+    "jquery": "^3.6.0",
+    "js-md5": "^0.7.3",
+    "v-charts": "^1.19.0",
+    "echarts": "^4.2.0-rc.2",
+    "vue": "^2.6.14",
+    "vue-router": "3.5.2",
+    "vue-socket.io": "^3.0.7",
+    "vuex": "^3.4.0",
+    "vxe-table": "^3.4.4",
+    "vue-pdf": "^4.3.0",
+    "xe-utils": "3"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~5.0.0",
+    "@vue/cli-service": "~5.0.0",
+    "crypto-js": "^4.1.1",
+    "sass": "^1.35.1",
+    "sass-loader": "^10.1.1",
+    "svg-sprite-loader": "^6.0.9",
+    "svgo": "^2.2.2",
+    "vue-template-compiler": "^2.6.14"
+  }
+}
