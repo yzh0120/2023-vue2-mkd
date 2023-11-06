@@ -12,9 +12,13 @@
     </div>
     <div class="m-steps-content" :class="['is-' + currentStatus]">
       <div class="u-steps-title">{{ title }}</div>
-      <div class="u-steps-description">
+      <!-- <div class="u-steps-description">
         {{ description }}
-        <slot></slot>
+        <slot></slot> -->
+        <span v-if="description"> {{ description }}  </span>     
+         <span v-else>
+          <slot class="u-steps-description" ></slot>
+         </span>
       </div>
     </div>
   </div>
