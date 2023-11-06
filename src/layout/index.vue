@@ -1,45 +1,50 @@
 
 <template>
   <el-container class="container">
+    <template v-if="$store.state.config.needLogin">
+      <el-header class="headerstyle">
+        <div style="display: flex;align-items: left;width:50px">
+          <img :src="require(`@/assets/logo.png`)" alt style="cursor: pointer;width:100%" @click="toHome" />
+        </div>
 
-    <el-header class="headerstyle">
-      <div style="display: flex;align-items: left;width:50px">
-        <img :src="require(`@/assets/logo.png`)" alt style="cursor: pointer;width:100%" @click="toHome" />
-      </div>
+        <el-menu :default-active="$route.path" router mode="horizontal" text-color="#000000" active-text-color="#F6384C">
+          <el-menu-item index="/home">首页</el-menu-item>
+          <el-menu-item index="/myGuarantee">我的订单</el-menu-item>
+          <el-menu-item index="/checkGuarantee">保函查验</el-menu-item>
+          <el-menu-item index="/info">用户信息</el-menu-item>
 
-      <el-menu :default-active="$route.path" router mode="horizontal" text-color="#000000" active-text-color="#F6384C">
-        <el-menu-item index="/home">首页</el-menu-item>
-        <el-menu-item index="/myGuarantee">我的订单</el-menu-item>
-        <el-menu-item index="/checkGuarantee">保函查验</el-menu-item>
-        <el-menu-item index="/info">用户信息</el-menu-item>
+        </el-menu>
+        <div class="right">
+          <el-button v-if="!userInfo.id" type="info" size="small" @click="tologin" class="loginBtn">登录</el-button>
+          <el-dropdown v-else :show-timeout="70" :hide-timeout="50" @command="onDropdownCommand">
+            <span>
+              <span v-if="userInfo.userName">{{ userInfo.userName }}</span>
+              <span v-else-if="userInfo.phone">{{ userInfo.phone }}</span>
+              <span v-else>未登录</span>
+              <i class="el-icon-arrow-down el-icon--right"></i>
+            </span>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item command="logOut">退出登录</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
 
-      </el-menu>
-      <div class="right">
-        <el-button v-if="!userInfo.id" type="info" size="small" @click="tologin" class="loginBtn">登录</el-button>
-        <el-dropdown v-else :show-timeout="70" :hide-timeout="50" @command="onDropdownCommand">
-          <span >
-            <span v-if="userInfo.userName">{{ userInfo.userName }}</span>
-            <span v-else-if="userInfo.phone">{{ userInfo.phone }}</span>
-            <span v-else>未登录</span>
-            <i class="el-icon-arrow-down el-icon--right"></i>
-          </span>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item command="logOut">退出登录</el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
+        </div>
+      </el-header>
 
-      </div>
-    </el-header>
-
-
-
-
-    <!-- 主体 -->
-    <el-main class="layout-main">
-      <el-scrollbar style="height: 100%; ">
+      <!-- 主体 -->
+      <el-main class="layout-main">
+        <el-scrollbar style="height: 100%; ">
+          <router-view></router-view>
+        </el-scrollbar>
+      </el-main>
+    </template>
+    <template v-else>
+      <div style="width: 1000px; margin: 0 auto;">
+        <el-scrollbar style="height: 100%; ">
         <router-view></router-view>
       </el-scrollbar>
-    </el-main>
+      </div>
+    </template>
 
   </el-container>
 </template>
@@ -117,9 +122,10 @@ export default {
 }
 
 ::v-deep {
-  .el-scrollbar__wrap{
+  .el-scrollbar__wrap {
     overflow: auto
   }
+
   .el-menu--horizontal {
     border: 0px;
 
@@ -129,12 +135,12 @@ export default {
     }
   }
 
-  .el-dropdown-menu__item{
-    &:hover{
+  .el-dropdown-menu__item {
+    &:hover {
       background-color: #FEEBED;
-    color: #F86070;
+      color: #F86070;
     }
-   
+
   }
 }
 </style>
