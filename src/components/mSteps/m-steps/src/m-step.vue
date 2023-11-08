@@ -1,8 +1,8 @@
 <template>
   <div class="m-steps-item">
     <div class="m-steps-icon" :class="['is-' + currentStatus]">
-      <template v-if="currentActive < index">
-        <!-- <i class="el-icon-close" v-if="status == 'error'"></i> -->
+      <!-- <template v-if="currentActive < index "> -->
+      <template v-if="currentActive < index + 1">
         <span class="u-icon">{{ index + 1 }}</span>
       </template>
       <template v-else>
@@ -13,8 +13,6 @@
     <div class="m-steps-content" :class="['is-' + currentStatus]">
       <div class="u-steps-title">{{ title }}</div>
       <div class="u-steps-description">
-        <!-- {{ description }}
-        <slot></slot> -->
         <span v-if="description"> {{ description }} </span>
         <span v-else>
           <slot class="u-steps-description"></slot>
@@ -31,12 +29,16 @@ export default {
     title: String,
     icon: String,
     description: String,
-    status: String
+    status: String,
+    currentActive: {
+      type: [String, Number],
+      default:""
+    },
   },
   data() {
     return {
       index: "-1",
-      currentActive: this.$parent.active,
+      // currentActive: this.$parent.active,
       totalSteps: "",
       internalStatus: ''
     }
